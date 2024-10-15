@@ -1,54 +1,126 @@
 body{
-    background-image: url("SunflowerField.png");
+    background-image: url("nightsky.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+    background-attachment: fixed;
+    margin: 0;
     font-family: 'Silkscreen', 'sans-serif';
-    font-size: 1.3rem;
     color: whitesmoke;
 }
-main{
+
+/* Navigaton Bar */
+.topnav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    font-size: 1.3rem;
+    z-index: 10;
+  }
+  
+.topnav a {
+    float: right;
+    position: sticky;
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 100%;
+}
+
+.topnav a:hover {
+    color: rgb(35, 122, 190);
+}
+
+/* Header - Introductory */
+.welcome {
+    text-align: center;
+    font-size: 2rem;
+    padding: 10% 10% 0 10%;
+}
+
+/* Header Description */
+.description {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0 10% 5% 10%;
+    z-index: 2;
+}
+
+/* Info */
+#overlay-info {
+    background-color: rgba(0,0,0,0.5);
+    padding: 3% 0 3% 0;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+#info {
+    font-size: 1rem;
+    color: whitesmoke;
+    padding: 5% 10% 10% 10%;
+    z-index: 2;
+}
+
+/* Footer */
+.footer {
+    bottom: 0;
+    width: 100%;
+    padding: 5% 2.5% 5% 2.5%;
+    font-family: 'Silkscreen', 'sans-serif';
+    text-align: center;
+    z-index: 9;
+}
+
+.footer a:link {
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: 1.2rem;
+    z-index: 9;
+}
+
+.footer a:hover {
+    color: rgb(125, 209, 215);
+    text-decoration: underline;
+    z-index: 9;
+}
+
+/* 404 Page */
+.error-container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    font-family: 'Silkscreen', 'sans-serif';
-}
-  
-.header404{
-    margin-bottom: 0%;
-    font-size: 10rem;
-    color: whitesmoke;
-}
-
-.content404{
-    margin: 0%;
     text-align: center;
+}   
+
+/* fix 404 padding / margin */
+h4 {
     font-family: 'Silkscreen', 'sans-serif';
+    color: whitesmoke;
+    font-size: 8rem;
+    text-align: center;
+    padding: 10vh;
+    margin-bottom: 0;
 }
 
-/* Go Home Link */
-a:link {
-    color: #7c7ce4;
+.error-message {
+    font-family: 'Silkscreen', 'sans-serif';
+    color: whitesmoke;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 0;
+}
+
+.error-message a:link {
+    color: rgb(125, 209, 215);
     background-color: transparent;
     text-decoration: none;
 }
 
-a:visited {
-    color: #eda6a6;
-    background-color: transparent;
-    text-decoration: none;
-}
-
-a:hover {
+.error-message a:hover {
     color: #fff;
-    background-color: transparent;
-    text-decoration: underline;
-}
-
-a:active {
-    color: #eda6a6;
     background-color: transparent;
     text-decoration: underline;
 }
