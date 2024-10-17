@@ -4,83 +4,65 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    margin: 0;
     font-family: 'Silkscreen', 'sans-serif';
     color: whitesmoke;
+    margin: 0;
+}
+
+.page-title {
+    padding: 5%;
+    margin: 0;
+}
+
+.content-background {
+    padding: 5% 10% 15% 10%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.about-me {
+    text-align: center;
+
 }
 
 /* Navigaton Bar */
-.topnav {
-    position: fixed;
+.navbar {
+    overflow: hidden;
     top: 0;
     width: 100%;
     font-size: 1.3rem;
-    z-index: 10;
-  }
-  
-.topnav a {
-    float: right;
-    position: sticky;
-    padding: 15px 15px;
-    text-align: center;
-    text-decoration: none;
-    color: whitesmoke;
-    font-size: 100%;
+    z-index: 100;
 }
 
-.topnav a:hover {
+.navbar a {
+    float: right;
+    color: whitesmoke;
+    text-decoration: none;
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+.navbar a:hover {
     color: rgb(170, 222, 247);
 }
 
-.topnav a:active {
+.navbar a:active {
     color: rgb(161, 231, 240);
 }
 
-/* Hello, World */
-.welcome {
+h2 {
+    font-size: 3rem;
     text-align: center;
-    font-size: 2rem;
+    padding-top: 5%;
     margin: 0;
-    padding-top: 10%;
-    z-index: 2;
 }
-
-.description {
-    font-size: 1.5rem;
-    margin: 0;
-    padding-bottom: 10%;
-}
-
-/* About Section */
-
-* {
-    box-sizing: border-box;
-  }
   
-/* Create two unequal columns that floats next to each other */
-.column {
-    float: left;
-    padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
-}
-
-.left {
-    width: 30%;
-}
-
-.right {
-    width: 70%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
+p {
+    text-align: center;
+    margin: 8%;
 }
 
 #about-section {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.8);
     padding: 2.5% 10% 10% 10%;
     z-index: 1;
 }
@@ -88,7 +70,6 @@ body{
 h3 {
     font-size: 2rem;
     text-align: left;
-    padding-top: 5%;
 }
 
 h3 a:link {
@@ -99,6 +80,11 @@ h3 a:link {
 h3 a:hover {
     color: rgb(170, 222, 247);
     text-decoration: none;
+}
+
+h4 {
+    font-size: 1.5rem;
+    text-align: center;
 }
 
 /* Hobbies & Interests */
@@ -116,7 +102,7 @@ ol a:hover {
 .footer {
     bottom: 0;
     width: 100%;
-    padding: 5% 2.5% 5% 2.5%;
+    padding: 10% 0 10% 0;
     font-family: 'Silkscreen', 'sans-serif';
     text-align: center;
     z-index: 9;
@@ -135,11 +121,6 @@ ol a:hover {
     z-index: 9;
 }
 
-h4 {
-    font-size: 1.5rem;
-    text-align: center;
-}
-
 /* 404 Page */
 h1 {
     font-family: 'Silkscreen', 'sans-serif';
@@ -147,7 +128,6 @@ h1 {
     font-size: 10rem;
     text-align: center;
     padding: 10vh;
-    margin-bottom: 0;
 }
 
 .error-container{
@@ -163,7 +143,6 @@ h1 {
     color: whitesmoke;
     font-size: 1.5rem;
     text-align: center;
-    margin-top: 0;
 }
 
 .error-message a:link {
@@ -224,40 +203,4 @@ Boxes
     cursor: pointer;
 }
 */
-
-
-
-/* Cards */
-/* Float four columns side by side */
-.column {
-    float: left;
-    width: 50%;
-    padding: 0 10px;
-  }
   
-  /* Remove extra left and right margins, due to padding */
-  .row {margin: 0 -5px;}
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  /* Responsive columns */
-  @media screen and (max-width: 600px) {
-    .column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
-    }
-  }
-  
-  /* Style the counter cards */
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 16px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5)
-  }
