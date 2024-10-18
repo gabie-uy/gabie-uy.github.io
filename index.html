@@ -10,7 +10,6 @@
     <title>Home Page</title>
 </head>
 <body>
-    <script src="script.js"></script>
     <div class="navbar">
         <a href="index.html" style="float: left; color: rgb(170, 222, 247);">Gabrielle Uy</a>
         <a href="index.html">Contact</a>
@@ -21,69 +20,80 @@
 
     <div class="page-title">
         <header>
-            <h2>Hello, World!</h2>
-            <p>Welcome to my personal website</p>
+            <h1>Hello, World!</h1>
+            <h5 style="text-align: center;">Welcome to my personal website</h5>
         </header>
     </div>
 
     <div class="content-background">
-        <div class="main-content-breakdown">
+        <div class="content">
             <!-- About Me Section -->
-            <div class="about-me">
-                <h3>About Me</h3>
-                <img src="dp.png" alt="Gabie" style="border-radius: 50%" width="25%">
-                <h4 style="font-family: 'Silkscreen'" >Gabrielle Uy</h4>
-                <h5>📍 New York, NY</h5>
-            </div>
-            <div class="bio">
-                <p>I'm aspiring to be a cybersecurity professional and a web developer. I built this website from scratch to showcase my portfolio and skills.</p>
-                <p>I graduated from BS in Information Technology concentrating in Business Analytics, and MS in Cybersecurity.</p>
-                <p>What you'll find here: </p>
-                <ol>
-                    <li>Certifications</li>
-                    <li>Projects & Research Papers</li>
-                    <li>Course & Hackathon Projects</li>
-                    <li>Capture-the-Flag Activities & other cybersecurity related work</li>
-                    <li>My hobbies & interests</li>
-                </ol>
-                <p>Feel free to look around!</p>
+            <div id="about-me">
+                <div class="section-header">
+                    <h2>About Me</h2>
+                </div>
+                    <div id="profile-pic">
+                        <img src="dp.png" alt="Gabie" style="border-radius: 50%" width="15%">
+                        <h3 style="font-family: 'Silkscreen'">Gabrielle Uy</h3>
+                        <h5>📍 New York, NY</h5>
+                    </div>
             </div>
 
-            <!-- GitHub Section-->
-            <div class="github">
-                <h3><a href="https://github.com/gabie-uy">GitHub</a></h3>
-                <div class="github-card" data-github="gabie-uy" data-width="100%" data-theme="default"></div>
-                <script src="https://cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
-            </div>
+                <div class="description">
+                    <p>I'm aspiring to be a cybersecurity professional and a web developer. I built this website from scratch to showcase my portfolio and skills.</p>
+                    <p>I graduated from BS in Information Technology concentrating in Business Analytics, and MS in Cybersecurity.</p>
+                    <p>What you'll find here: </p>
+                        <ol>
+                            <li>Certifications</li>
+                            <li>Projects & Research Papers</li>
+                            <li>Course & Hackathon Projects</li>
+                            <li>Capture-the-Flag Activities & other cybersecurity related work</li>
+                            <li>My hobbies & interests</li>
+                        </ol>
+                    <p>Feel free to look around!</p>
+                </div>
+        
+                <!-- Hobbies & Interests Section-->
+                <div id="interests">
+                    <div class="section-header">
+                        <h2>Hobbies & Interests</h2>
+                    </div>
+                    <div class="description">
+                        <ol>
+                            <li><a href="https://vsco.co/gabie-uy/gallery">Photography</a></li>
+                            <li>Being a coffee barista</li>
+                            <li>Traveling & learning new languages (currently: Japanese)</li>
+                            <li>Anything pixelated (from games, designs, etc.)</li>
+                            <li>Sports - Watching international volleyball, Formula 1</li>
+                            <li>Sports – I play volleyball, golf, badminton (when I can: racing, pickleball)</li>
+                            <li><a href="https://www.twitch.tv/gabizzle11">Gaming</a></li>
+                            <li><a href="https://myanimelist.net/profile/gabizzle">Anime</a></li>
+                        </ol>
+                    </div>
+                </div>
 
-            <!-- Hobbies & Interests Section-->
-            <div class="interests">
-                <h3>Hobbies & Interests</h3>
-                <p></p>
-                <ol>
-                    <li><a href="https://vsco.co/gabie-uy/gallery">Photography</a></li>
-                    <li>Being a coffee barista</li>
-                    <li>Traveling & learning new languages (currently: Japanese)</li>
-                    <li>Anything pixelated (from games, designs, etc.)</li>
-                    <li>Sports - Watching international volleyball, Formula 1</li>
-                    <li>Sports – I play volleyball, golf, badminton (when I can: racing, pickleball)</li>
-                    <li><a href="https://www.twitch.tv/gabizzle11">Gaming</a></li>
-                    <li><a href="https://myanimelist.net/profile/gabizzle">Anime</a></li>
-                </ol>
-            </div>
+                <!-- GitHub Section-->
+                <div class="github">
+                    <div class="section-header">
+                        <h2><a href="https://github.com/gabie-uy">GitHub</a></h2>
+                    </div>
+                    <div id="github-content">
+                        <div class="github-card" data-github="gabie-uy" data-width="100%" data-theme="default"></div>
+                        <script src="https://cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
-</div>
     
 <!-- Footer -->
-<div class="footer-content">
-    <footer>Connect with me!</footer>
+<footer>
+    <p>Connect with me!</p>
       <a href="https://instagram.com/gabieuy" target="_blank"><img src="Instagram.png" alt="Instagram"></a>
       <a href="https://linkedin.com/in/gabrielleauy" target="_blank"><img src="LinkedIn.png" alt="LinkedIn"></a>
       <a href="https://gabie-uy.notion.site/R-sum-120fff2f9f46804ebb51cd7f5efb1e0d?pvs=4" target="_blank"><img src="Notion.png" alt="Notion"></a>
       <a href="https://Twitch.com/gabizzle11" target="_blank"><img src="Twitch.png" alt="Twitch"></a>
-      <p style="margin-top: 5%;">© 2024 Gabrielle Uy</p>
-  </div>
-  </body>
-  </html>
+      <p>© 2024 Gabrielle Uy</p>
+</footer>
+</body>
+</html>

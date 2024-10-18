@@ -10,37 +10,67 @@ body{
     margin: 0;
 }
 
-.page-title {
-    padding: 5%;
-    margin: 0;
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Silkscreen', 'Varela Round', 'sans-serif';
+    margin: 1%;
 }
 
-.content-background {
-    padding: 5% 10% 15% 10%;
-    background-color: rgba(221, 221, 221, 0.245);
-}
-
-.about-me {
-    font-family: 'Varela Round', 'sans-serif';
+h1 {
+    font-size: 5vw;
     text-align: center;
+}
+
+h2 {
+    font-size: 3vw;
+    text-align: left;
+}
+
+h2 a:link {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+h2 a:hover {
+    color: rgb(50, 85,147);
+    text-decoration: none;
+}
+
+h3 {
+    font-size: 2.5vw;
+}
+
+h4 {
+    font-size: 2vw;
+}
+
+h5 {
+    font-size: 1.5vw;
+}
+
+p, ul, ol {
+    font-size: 1.3vw;
 }
 
 /* Navigaton Bar */
 .navbar {
-    font-family: 'Silkscreen', 'Varela Round', 'sans-serif';;
+    position: sticky;
+    font-family: 'Silkscreen', 'Varela Round', 'sans-serif';
     overflow: hidden;
     top: 0;
     width: 100%;
-    font-size: 1.3rem;
+    font-size: 1rem;
     z-index: 100;
 }
 
 .navbar a {
     float: right;
+    font-size: 1.3rem;
     color: whitesmoke;
     text-decoration: none;
-    padding: 0.5rem;
-    margin: 0.5rem;
+    margin: 0.5%;   
+    padding: 0 2% 0 2%;
+
 }
 
 .navbar a:hover {
@@ -51,166 +81,158 @@ body{
     color: rgb(161, 231, 240);
 }
 
+/* Content */
+.content-background {
+    background-color: rgba(255, 255, 255, 0.136);
+    padding: 5% 15% 5% 15%;
+}
+
+.section-header {
+    margin: 0 5% 0 5%;
+}
+
+.page-title {
+    margin: 5% 0 5% 0;
+}
+
+#profile-pic {
+    text-align: center;
+}
+
+.description {
+    padding: 2% 10% 2% 10%;
+}
+
+.description a:link {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.description a:hover {
+    color: rgb(50, 85,147);
+    text-decoration: none;
+}
+
+#github-content {
+    padding: 2%;
+    margin: 5%;
+}
+
+#table-of-contents  h2{
+    text-align: center;
+    margin: 0;
+}
+
+#table-of-contents ol {
+    padding: 0 10% 0 10%;
+}
+
 /* Certifications */
 .column {
     float: left;
-    width: 33%;
-    padding: 1.5%;
-}
-
-.row {margin: 0 -5px;}
-
-.row:after {
+    width: 30.33%;
+    margin: 1%;
+  }
+  
+.row {margin: 0 ;}
+  
+  .row:after {
     content: "";
     display: table;
     clear: both;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+    }
+  }
+  
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.136);
 }
 
-@media screen and (max-width: 700px) {
-    .column {
-        width: 100%;
-        display: block;
-        margin-bottom: 20px;
+#certifications {
+    margin: 0 5% 0 5%;
+    font-size: 1.3vw;
+}
+
+#certifications a:link {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+#certifications a:hover {
+    color: rgb(50, 85,147);
+    text-decoration: none;
+}
+
+@media screen and (min-width: 600px) {
+    .row {
+        display: flex;
+        padding: 2%;
     }
 }
 
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 5%;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.264);
+/* Research Papers */
+.research-papers-content {
+    margin: 0 2.5% 0 2.5%;
+    padding: 0 2.5% 0 2.5%;
 }
 
-h2 {
-    font-family: 'Silkscreen', 'Varela Round', 'sans-serif';
-    font-size: 3rem;
-    text-align: center;
-    padding-top: 5%;
-    margin: 0;
-}
-  
-p {
-    text-align: center;
-    margin: 8%;
-}
-
-#about-section {
-    padding: 2.5% 10% 10% 10%;
-    z-index: 1;
-}
-
-h3 {
-    font-family: 'Silkscreen', 'Varela Round', 'sans-serif';;
-    font-size: 2.3rem;
-    text-align: left;
-}
-
-h3 a:link {
+.research-papers-content a:link {
+    font-family: 'Quicksand', 'sans-serif';
+    font-size: 1.3vw;
     color: whitesmoke;
     text-decoration: none;
 }
 
-h3 a:hover {
+.research-papers-content a:hover {
     color: rgb(50, 85,147);
     text-decoration: none;
 }
 
-h4 {
-    font-size: 1.5rem;
-    text-align: center;
+.column-one {
+    float: left;
+    width: 48%;
+    margin-right: 2%;
 }
 
-h5 {
-    font-size: 1rem;
-    text-align: center;
-}
 
-/* Certifications */
-.certifications a:link {
-    color: whitesmoke;
-    text-decoration: none;
-}
-
-.certifications a:hover {
-    color: rgb(50, 85,147);
-    text-decoration: none;
-}
-
-/* Interests */
-.interests a:link {
-    color: whitesmoke;
-    text-decoration: none;
-}
-
-.interests a:hover {
-    color: rgb(50, 85,147);
-    text-decoration: none;
+.column-two {
+    float: left;
+    width: 48%;
+    margin-left: 2%;
 }
 
 /* Footer */
 footer {
-    padding-top: 10%;
-}
-
-.footer-content {
     font-family: 'Silkscreen', 'Varela Round', 'sans-serif';
     position: absolute;
     width: 100%;
     text-align: center;
     align-items: center;
+    margin: 0;
 }
 
-.footer-content a:link {
+footer p {
+    font-size: 1rem;
+}
+
+footer a:link {
     color: whitesmoke;
     text-decoration: none;
 }
 
-.footer-content img {
-    height: 45px;
-    padding-top: 2%;
-}
-
-.footer-content a:hover {
+footer a:hover {
     color: rgb(125, 209, 215);
     text-decoration: underline;
 }
 
-
-/* Research Papers */
-.research-papers ul {
-    font-size: 1rem;
-    text-align: left;
-    padding: 0;
-}
-
-@media screen and (min-width: 500px) {
-    .row {
-        display: flex;
-        }
-}
-
-.column-one {
-    float: left;
-    width: 50%;
-    margin: 5%;
-}
-
-.column-two {
-    float: left;
-    width: 50%;
-    margin: 5%;
-}
-
-.bio h4 {
-    font-family: 'Silkscreen', 'Varela Round', 'sans-serif';
-    text-align: left;
-}
-
-.bio p {
-    text-align: left;
-}
-
-.bio h5 {
-    font-family: 'Silkscreen', 'Varela Round', 'sans-serif';
-    text-align: left;
+footer img {
+    width: 45px;
 }
