@@ -200,3 +200,17 @@ footer {
     width: 50%;
     margin: 5%;
 }
+
+.bio h4 {
+    font-family: 'Silkscreen', 'Varela Round', 'sans-serif';
+    text-align: left;
+}
+
+.bio p {
+    text-align: left;
+}
+
+.bio h5 {
+    font-family: 'Silkscreen', 'Varela Round', 'sans-serif';
+    text-align: left;
+}
