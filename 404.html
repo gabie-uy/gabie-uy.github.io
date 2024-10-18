@@ -7,13 +7,50 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen">
+<style>
+    h1 {
+        font-family: 'Silkscreen', 'sans-serif';
+        font-size: 10rem;
+        color: whitesmoke;
+        text-align: center;
+        padding: 0;
+        margin: 10% 5% 10 5%;
+    }
+    
+    .error-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }   
+    
+    .error-message {
+        font-family: 'Silkscreen', 'sans-serif';
+        color: whitesmoke;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    
+    .error-message a:link {
+        color: rgb(35, 122, 190);
+        background-color: transparent;
+        text-decoration: none;
+    }
+    
+    .error-message a:hover {
+        color: rgb(125, 209, 215);
+        background-color: transparent;
+        text-decoration: underline;
+    }
+</style>
 </head>
 <body>
     <div class="error-containter">
         <h1>404</h1>
         <div class="error-message">
         <p>Oops! Don't get lost at sea...</p>
-        <p><a href="index.html">Go Home</a></p>
+        <a href="index.html">Go Home</a>
     </div>
     </div>
 </body>

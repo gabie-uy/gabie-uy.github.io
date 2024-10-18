@@ -1,10 +1,11 @@
 body{
-    background-image: url("background_28.png");
+    background-image: url("background_5.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    font-family: 'Silkscreen', 'sans-serif';
+    font-family: 'Quicksand', 'sans-serif';
+    letter-spacing: 1px;
     color: whitesmoke;
     margin: 0;
 }
@@ -16,16 +17,17 @@ body{
 
 .content-background {
     padding: 5% 10% 15% 10%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(221, 221, 221, 0.245);
 }
 
 .about-me {
+    font-family: 'Varela Round', 'sans-serif';
     text-align: center;
-
 }
 
 /* Navigaton Bar */
 .navbar {
+    font-family: 'Silkscreen', 'Varela Round', 'sans-serif';;
     overflow: hidden;
     top: 0;
     width: 100%;
@@ -49,7 +51,38 @@ body{
     color: rgb(161, 231, 240);
 }
 
+/* Certifications */
+.column {
+    float: left;
+    width: 33%;
+    padding: 1.5%;
+}
+
+.row {margin: 0 -5px;}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 700px) {
+    .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 5%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.264);
+}
+
 h2 {
+    font-family: 'Silkscreen', 'Varela Round', 'sans-serif';
     font-size: 3rem;
     text-align: center;
     padding-top: 5%;
@@ -62,13 +95,13 @@ p {
 }
 
 #about-section {
-    background-color: rgba(0,0,0,0.8);
     padding: 2.5% 10% 10% 10%;
     z-index: 1;
 }
 
 h3 {
-    font-size: 2rem;
+    font-family: 'Silkscreen', 'Varela Round', 'sans-serif';;
+    font-size: 2.3rem;
     text-align: left;
 }
 
@@ -78,7 +111,7 @@ h3 a:link {
 }
 
 h3 a:hover {
-    color: rgb(170, 222, 247);
+    color: rgb(50, 85,147);
     text-decoration: none;
 }
 
@@ -87,120 +120,83 @@ h4 {
     text-align: center;
 }
 
-/* Hobbies & Interests */
-ol a:link {
+h5 {
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* Certifications */
+.certifications a:link {
     color: whitesmoke;
     text-decoration: none;
 }
 
-ol a:hover {
-    color: rgb(170, 222, 247);
+.certifications a:hover {
+    color: rgb(50, 85,147);
+    text-decoration: none;
+}
+
+/* Interests */
+.interests a:link {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.interests a:hover {
+    color: rgb(50, 85,147);
     text-decoration: none;
 }
 
 /* Footer */
-.footer {
-    bottom: 0;
+footer {
+    padding-top: 10%;
+}
+
+.footer-content {
+    font-family: 'Silkscreen', 'Varela Round', 'sans-serif';
+    position: absolute;
     width: 100%;
-    padding: 10% 0 10% 0;
-    font-family: 'Silkscreen', 'sans-serif';
     text-align: center;
-    z-index: 9;
-}
-
-.footer a:link {
-    color: whitesmoke;
-    text-decoration: none;
-    font-size: 1.2rem;
-    z-index: 9;
-}
-
-.footer a:hover {
-    color: rgb(125, 209, 215);
-    text-decoration: underline;
-    z-index: 9;
-}
-
-/* 404 Page */
-h1 {
-    font-family: 'Silkscreen', 'sans-serif';
-    color: whitesmoke;
-    font-size: 10rem;
-    text-align: center;
-    padding: 10vh;
-}
-
-.error-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-}   
-
-.error-message {
-    font-family: 'Silkscreen', 'sans-serif';
-    color: whitesmoke;
-    font-size: 1.5rem;
-    text-align: center;
 }
 
-.error-message a:link {
-    color: rgb(35, 122, 190);
-    background-color: transparent;
+.footer-content a:link {
+    color: whitesmoke;
     text-decoration: none;
 }
 
-.error-message a:hover {
+.footer-content img {
+    height: 45px;
+    padding-top: 2%;
+}
+
+.footer-content a:hover {
     color: rgb(125, 209, 215);
-    background-color: transparent;
     text-decoration: underline;
 }
 
 
-
-/*
-
-Boxes
-* {
-    box-sizing: border-box;
-  }
-
-#recentProject .column {
-    float: left;
-    width: 33.33%;
-    padding: 50px;
-    text-align: center;
+/* Research Papers */
+.research-papers ul {
     font-size: 1rem;
-    cursor: pointer;
+    text-align: left;
+    padding: 0;
 }
 
-#recentResearch .column {
+@media screen and (min-width: 500px) {
+    .row {
+        display: flex;
+        }
+}
+
+.column-one {
     float: left;
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    font-size: 1rem;
-    cursor: pointer;
+    width: 50%;
+    margin: 5%;
 }
 
-.projectTab {
-    padding: 50px;
+.column-two {
+    float: left;
+    width: 50%;
+    margin: 5%;
 }
-
-/* Clear floats after the columns
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-    */
-
-/* Closable button inside the container tab
-.closebtn {
-    float: right;
-    font-size: 2rem;
-    cursor: pointer;
-}
-*/
-  
