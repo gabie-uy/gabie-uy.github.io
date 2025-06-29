@@ -17,7 +17,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 5rem;
+    font-size: 4rem;
     text-align: center;
 }
 
@@ -64,7 +64,7 @@ p, ul, ol {
 
 .navbar a {
     float: right;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: whitesmoke;
     text-decoration: none;
     margin: 1%;   
@@ -91,7 +91,7 @@ p, ul, ol {
 }
 
 .page-title {
-    margin: 5% 0 5% 0;
+    margin: 10%;
 }
 
 #profile-pic {
@@ -170,7 +170,7 @@ p, ul, ol {
     text-decoration: none;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (max-width: 600px) {
     .row {
         display: flex;
         padding: 2%;
