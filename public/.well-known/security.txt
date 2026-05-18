@@ -1,0 +1,46 @@
+# ┌──────────────────────────────────────────────────┐
+# │                                                  │
+# │  gabieuy.com  ·  responsible disclosure          │
+# │  from somewhere, with coffee.                    │
+# │                                                  │
+# └──────────────────────────────────────────────────┘
+#
+# hello —
+#
+# you found this on purpose, so I'll be brief.
+# if you've spotted something broken or worrying about
+# this site or its infrastructure, please reach me at
+# the address below. I work on the defensive side of
+# security and I read every report.
+# you'll hear back within 7 days, more likely 2.
+#
+# things I'll say thank you for:
+#   — anything that exposes data that shouldn't be exposed
+#   — anything that lets you impersonate me or my site
+#   — anything that breaks the contact channel itself
+#
+# things this file is not for:
+#   — opinions about my Pilot Hi-Tec-C addiction
+#   — opinions about the Knicks
+#   — Bella (she has her own threat model. see /about)
+#
+# coffee was had during the writing of this file.
+#
+# — gabrielle
+
+Contact: mailto:security@gabieuy.com
+Contact: https://github.com/gabie-uy
+Expires: 2027-05-15T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://gabieuy.com/.well-known/security.txt
+Encryption: https://gabieuy.com/.well-known/gabie-uy.pub.asc
+
+# ──────────────────────────────────────────────────────
+#
+# pgp fingerprint (placeholder until a real key exists):
+# 1A2B 3C4D 5E6F 7890 ABCD  1234 5678 9ABC DEF0 1234
+#
+# this file is RFC 9116. parsers see the fields below
+# the postcard; humans get the postcard.
+#
+# ──────────────────────────────────────────────────────

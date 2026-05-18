@@ -1,0 +1,235 @@
+---
+import '@fontsource/silkscreen/400.css';
+import '@fontsource/silkscreen/700.css';
+import '@fontsource/poppins/300.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/400-italic.css';
+import '@fontsource/jetbrains-mono/400.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Gabrielle Uy',
+  description = 'Detection, defense, and a notebook for everything else.',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/" class="brand">Gabrielle</a>
+      <nav>
+        <a href="/about/">about</a>
+        <a href="/about/#work">work</a>
+        <a href="/repository/">repository</a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <script is:inline>
+      // Discourage casual image saves on images. (Friction only — not screenshot-proof.)
+      document.addEventListener('contextmenu', function (e) {
+        if (e.target && e.target.tagName === 'IMG') e.preventDefault();
+      });
+      document.addEventListener('dragstart', function (e) {
+        if (e.target && e.target.tagName === 'IMG') e.preventDefault();
+      });
+
+      (function () {
+        if (typeof IntersectionObserver === 'undefined') return;
+        const selector = 'main > section, main > article, main > header, main > div > section, .card';
+        const els = Array.from(document.querySelectorAll(selector));
+        if (!els.length) return;
+        els.forEach((el) => el.classList.add('scroll-animate'));
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+              } else {
+                entry.target.classList.remove('in-view');
+              }
+            });
+          },
+          { threshold: 0.06, rootMargin: '0px 0px -40px 0px' }
+        );
+        els.forEach((el) => io.observe(el));
+      })();
+    </script>
+    <footer class="site-footer">
+      <p>© {new Date().getFullYear()} gabrielle uy · made by hand</p>
+    </footer>
+
+    <style is:global>
+      :root {
+        --paper: #fbfaf6;        /* warm cream */
+        --paper-warm: #f0eee6;   /* slightly cooler tag bg */
+        --ink: #1c2230;          /* deep cool ink, near-navy */
+        --ink-soft: #5c6470;
+        --rule: #dad6ce;
+        --accent: #006BB6;       /* Knicks blue — primary accent */
+        --accent-deep: #003e6e;  /* darker blue for hover/depth */
+        --warm: #F58426;         /* Knicks orange — secondary, used sparingly */
+
+        /* --serif kept as variable name for back-compat; value is Poppins (sans) */
+        --serif: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        --pixel: 'Silkscreen', 'Courier New', monospace;
+        --mono: 'JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+        --sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      html, body { margin: 0; padding: 0; }
+      :target, h2[id] { scroll-margin-top: 5rem; }
+
+      /* Discourage casual image saves (not screenshot-proof; just friction) */
+      img {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        -webkit-touch-callout: none;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Crisp pixel rendering for Silkscreen */
+      .pixel,
+      .pixel * {
+        font-family: var(--pixel);
+        -webkit-font-smoothing: none;
+        -moz-osx-font-smoothing: grayscale;
+        font-smooth: never;
+        letter-spacing: 0;
+      }
+      a {
+        color: var(--ink);
+        text-decoration-color: var(--rule);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
+        transition: text-decoration-color 0.15s ease, color 0.15s ease;
+      }
+      a:hover { text-decoration-color: var(--warm); color: var(--warm); }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--paper);
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        padding: 1.4rem 2.5rem 1.1rem;
+        max-width: 1100px;
+        margin: 0 auto;
+        border-bottom: 1px solid var(--rule);
+      }
+      .brand {
+        font-family: var(--pixel);
+        -webkit-font-smoothing: none;
+        font-smooth: never;
+        font-size: 1.3rem;
+        text-decoration: none;
+        letter-spacing: 0.02em;
+      }
+      @keyframes blink { 50% { opacity: 0; } }
+      .site-header nav {
+        display: flex;
+        gap: 1.5rem;
+        font-family: var(--pixel);
+        -webkit-font-smoothing: none;
+        font-smooth: never;
+        font-size: 0.78rem;
+        letter-spacing: 0.04em;
+      }
+      .site-header nav a {
+        text-decoration: none;
+        color: var(--ink);
+      }
+      .site-header nav a:hover { color: var(--warm); }
+
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 3rem 2.5rem 5rem;
+      }
+
+      .site-footer {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem 2.5rem 3rem;
+        border-top: 1px solid var(--rule);
+        font-family: var(--pixel);
+        -webkit-font-smoothing: none;
+        font-smooth: never;
+        font-size: 0.72rem;
+        color: var(--ink-soft);
+        letter-spacing: 0.02em;
+      }
+      .site-footer p { margin: 0.4rem 0; }
+      .site-footer a { color: var(--ink-soft); }
+      .site-footer a:hover { color: var(--warm); }
+
+      /* Sitewide scroll-reveal — smooth ease-out, sections + cards.
+         Double-class selector boosts specificity above scoped .card rules. */
+      .scroll-animate.scroll-animate.scroll-animate {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: opacity, transform;
+      }
+      .scroll-animate.scroll-animate.scroll-animate.in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* Keep hover lift when card is in view */
+      .card.scroll-animate.scroll-animate.scroll-animate.in-view:hover {
+        transform: translateY(-2px) rotate(-0.2deg);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .scroll-animate.scroll-animate.scroll-animate,
+        .scroll-animate.scroll-animate.scroll-animate.in-view {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .site-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.8rem;
+          padding: 1.5rem 1.25rem 1rem;
+        }
+        main { padding: 2rem 1.25rem 4rem; }
+        .site-footer { padding: 1.5rem 1.25rem 2rem; }
+      }
+    </style>
+  </body>
+</html>

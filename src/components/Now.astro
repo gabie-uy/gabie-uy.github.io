@@ -1,0 +1,54 @@
+---
+const currently = [
+  { label: 'writing', value: 'detections for cloud lateral movement' },
+  { label: 'reading', value: "The Cuckoo's Egg (again)" },
+  { label: 'watching', value: 'twitch.tv/gabieuy on Thursdays' },
+  { label: 'missing', value: 'Kyoto in spring' },
+];
+---
+<aside class="now">
+  <h4>currently</h4>
+  <ul>
+    {currently.map((item) => (
+      <li><span class="label">{item.label}</span> {item.value}</li>
+    ))}
+  </ul>
+</aside>
+
+<style>
+  .now {
+    border: 1px dashed var(--rule);
+    padding: 1.1rem 1.3rem;
+    background: rgba(91, 125, 122, 0.04);
+  }
+  .now h4 {
+    margin: 0 0 0.8rem;
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+  }
+  .now ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.95rem;
+  }
+  .now li {
+    margin: 0.5rem 0;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .label {
+    display: inline-block;
+    min-width: 5.5rem;
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+</style>

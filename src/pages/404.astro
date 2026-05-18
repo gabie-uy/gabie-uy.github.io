@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="404 · Gabrielle Uy" description="Page not found.">
+  <article class="nf">
+    <h1 class="nf-num">404<span class="blink">_</span></h1>
+    <p class="nf-lede">Looks like a missing entry.</p>
+
+    <div class="terminal" role="region" aria-label="404 terminal">
+      <div class="terminal-titlebar">
+        <span class="dot dot-red" aria-hidden="true"></span>
+        <span class="dot dot-yellow" aria-hidden="true"></span>
+        <span class="dot dot-green" aria-hidden="true"></span>
+        <span class="terminal-title">~ &mdash; gabrielle@gabieuy</span>
+      </div>
+      <div class="terminal-body">
+        <p class="line"><span class="prompt">gabrielle@gabieuy</span><span class="path">:~$</span> <span class="cmd">cd <span id="missing-path">/the-path-you-wanted</span></span></p>
+        <p class="line err">bash: cd: <span id="missing-path-2">/the-path-you-wanted</span>: no such file or directory</p>
+        <p class="line"><span class="prompt">gabrielle@gabieuy</span><span class="path">:~$</span> <span class="cmd">ls ~/where-i-actually-am</span></p>
+        <p class="line out"><a href="/">home/</a>  <a href="/about/">about/</a>  <a href="/repository/">repository/</a></p>
+        <p class="line"><span class="prompt">gabrielle@gabieuy</span><span class="path">:~$</span> <span class="cursor" aria-hidden="true"></span></p>
+      </div>
+    </div>
+
+    <nav class="nf-nav">
+      <a href="/">→ home</a>
+      <a href="/about/">→ about</a>
+      <a href="/repository/">→ repository</a>
+    </nav>
+
+    <p class="nf-note">
+      If you got here from somewhere on my site, that's my mistake —
+      <a href="mailto:gabrielleag.uy@gmail.com">tell me</a> and I'll fix it.
+    </p>
+  </article>
+
+  <script is:inline>
+    (function () {
+      const path = window.location.pathname;
+      const a = document.getElementById('missing-path');
+      const b = document.getElementById('missing-path-2');
+      if (a) a.textContent = path;
+      if (b) b.textContent = path;
+    })();
+  </script>
+</BaseLayout>
+
+<style>
+  .nf {
+    max-width: 36rem;
+    margin: 0 auto;
+    padding: 2rem 0 3rem;
+    text-align: left;
+  }
+  .nf-num {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 4rem;
+    line-height: 1.1;
+    letter-spacing: 0.04em;
+    margin: 0 0 0.4rem;
+    color: var(--ink);
+  }
+  .nf-num .blink {
+    color: var(--accent);
+    animation: blink 1.1s steps(1) infinite;
+    margin-left: 0.2rem;
+  }
+  .nf-lede {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    margin: 0 0 1.8rem;
+    font-style: italic;
+  }
+
+  .terminal {
+    background: #1c2230;
+    border: 1px solid #2a3142;
+    border-radius: 6px;
+    overflow: hidden;
+    font-family: var(--mono);
+    margin: 0 0 2rem;
+    box-shadow: 0 6px 24px rgba(28, 34, 48, 0.18);
+  }
+  .terminal-titlebar {
+    background: #2a3142;
+    padding: 0.55rem 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .dot {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+  }
+  .dot-red { background: #ff5f56; }
+  .dot-yellow { background: #ffbd2e; }
+  .dot-green { background: #27c93f; }
+  .terminal-title {
+    margin-left: 0.8rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: rgba(240, 235, 224, 0.55);
+  }
+  .terminal-body {
+    padding: 0.9rem 1.1rem 1.1rem;
+    font-family: var(--mono);
+    font-size: 0.84rem;
+    line-height: 1.8;
+    color: #d4d0c4;
+    overflow-x: auto;
+  }
+  .terminal-body .line { margin: 0; white-space: nowrap; }
+  .terminal-body .prompt { color: #6dd17b; }
+  .terminal-body .path { color: #7bb1d9; margin-right: 0.5rem; }
+  .terminal-body .cmd { color: #f0ebe0; }
+  .terminal-body .err { color: #ff8a7a; }
+  .terminal-body .out { color: #d4d0c4; }
+  .terminal-body .out a {
+    color: #7bb1d9;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(123, 177, 217, 0.4);
+    margin-right: 0.6rem;
+  }
+  .terminal-body .out a:hover {
+    color: #ffbd6a;
+    border-bottom-color: #ffbd6a;
+  }
+  .terminal-body .cursor {
+    display: inline-block;
+    background: #f0ebe0;
+    width: 0.55rem;
+    height: 0.95rem;
+    vertical-align: -2px;
+    animation: blink 1.1s steps(1) infinite;
+  }
+
+  .nf-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin: 0 0 1.8rem;
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+  .nf-nav a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+  }
+  .nf-nav a:hover {
+    color: var(--warm);
+    border-bottom-color: var(--warm);
+  }
+
+  .nf-note {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .nf-note a {
+    color: var(--accent);
+    text-decoration-color: var(--rule);
+  }
+  .nf-note a:hover { color: var(--warm); }
+</style>

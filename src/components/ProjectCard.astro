@@ -1,0 +1,115 @@
+---
+import { repoLabel } from '../data/projects';
+import type { ParentRepo } from '../data/projects';
+
+interface Props {
+  number: number;
+  title: string;
+  description: string;
+  url: string;
+  repo: ParentRepo;
+}
+const { number, title, description, url, repo } = Astro.props;
+const numberStr = number.toString().padStart(2, '0');
+---
+<a href={url} class="card" target="_blank" rel="noopener" data-repo={repo}>
+  <div class="card-head">
+    <span class="card-number">{numberStr}</span>
+    <span class={`card-repo card-repo-${repo}`}>{repoLabel(repo)}</span>
+  </div>
+  <h3 class="card-title">{title}</h3>
+  <p class="card-description">{description}</p>
+  <span class="card-link">view on github →</span>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 1.3rem 1.4rem 1.2rem;
+    color: var(--ink);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    height: 100%;
+  }
+  .card:hover {
+    transform: translateY(-2px) rotate(-0.2deg);
+    box-shadow: 0 6px 20px rgba(28, 34, 48, 0.08);
+  }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.7rem;
+  }
+  .card-number {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .card-repo {
+    font-family: var(--serif);
+    font-size: 0.78rem;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: capitalize;
+    padding: 0;
+    background: transparent;
+    border: none;
+    line-height: 1;
+    position: relative;
+    padding-left: 0.7rem;
+  }
+  .card-repo::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0.8rem;
+    background: currentColor;
+  }
+  .card-repo-Penetration-Testing,
+  .card-repo-Intrusion-Detection,
+  .card-repo-Incident-Response-Risk-Management {
+    color: var(--accent);
+  }
+  .card-repo-Web-Development,
+  .card-repo-Python,
+  .card-repo-Other-Languages {
+    color: var(--ink-soft);
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    line-height: 1.25;
+    margin: 0 0 0.55rem;
+    font-weight: 600;
+  }
+  .card-description {
+    margin: 0 0 1rem;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    flex: 1;
+  }
+  .card-link {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    align-self: flex-start;
+  }
+  .card:hover .card-link { color: var(--warm); }
+</style>

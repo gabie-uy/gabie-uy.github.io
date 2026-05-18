@@ -1,0 +1,111 @@
+---
+import { isSecurityTopic } from '../lib/repos';
+
+interface Props {
+  href: string;
+  name: string;
+  description?: string | null;
+  language?: string | null;
+  topics?: string[];
+  updatedAt: string;
+}
+const {
+  href,
+  name,
+  description,
+  language,
+  topics = [],
+  updatedAt,
+} = Astro.props;
+
+const dateStr = new Date(updatedAt).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+});
+const displayName = name.replace(/[-_]/g, ' ');
+// Show security topics first, capped at 4 total
+const sortedTopics = [
+  ...topics.filter(isSecurityTopic),
+  ...topics.filter((t) => !isSecurityTopic(t)),
+].slice(0, 4);
+---
+<a href={href} class="card" target="_blank" rel="noopener" data-topics={topics.join(' ')}>
+  <div class="card-meta">
+    {language && <span>{language.toLowerCase()}</span>}
+    {language && <span class="dot">·</span>}
+    <span>updated {dateStr.toLowerCase()}</span>
+  </div>
+  <h3 class="card-title">{displayName}</h3>
+  {description && <p class="card-summary">{description}</p>}
+  <div class="card-tags">
+    {sortedTopics.map((t) => (
+      <span class={`tag ${isSecurityTopic(t) ? 'tag-tech' : ''}`}>{t}</span>
+    ))}
+  </div>
+</a>
+
+<style>
+  .card {
+    display: block;
+    text-decoration: none;
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 1.25rem 1.4rem;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    color: var(--ink);
+    position: relative;
+  }
+  .card:hover {
+    transform: translateY(-2px) rotate(-0.3deg);
+    box-shadow: 0 6px 20px rgba(28, 34, 48, 0.08);
+  }
+
+  .card-meta {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.66rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+  .card-meta .dot { opacity: 0.5; }
+
+  .card-title {
+    font-size: 1.35rem;
+    line-height: 1.25;
+    margin: 0.55rem 0 0.5rem;
+    font-weight: 600;
+    text-transform: lowercase;
+  }
+  .card-summary {
+    margin: 0 0 0.9rem;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.6rem;
+    letter-spacing: 0.04em;
+    text-transform: lowercase;
+    padding: 0.25rem 0.5rem 0.18rem;
+    border: 1px solid var(--rule);
+    background: var(--paper-warm);
+    color: var(--ink-soft);
+    line-height: 1;
+  }
+  .tag-tech {
+    color: white;
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+</style>

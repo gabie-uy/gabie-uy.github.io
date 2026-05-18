@@ -1,0 +1,66 @@
+---
+import TagPill from './TagPill.astro';
+
+interface Props {
+  href: string;
+  title: string;
+  date: Date;
+  tags: string[];
+  summary?: string;
+  location?: string;
+}
+const { href, title, date, tags, summary, location } = Astro.props;
+const dateStr = date.toLocaleDateString('en-US', {
+  year: 'numeric', month: 'short', day: 'numeric',
+});
+---
+<a href={href} class="card">
+  <div class="card-meta">
+    <span>{dateStr}</span>
+    {location && <span> · {location}</span>}
+  </div>
+  <h3 class="card-title">{title}</h3>
+  {summary && <p class="card-summary">{summary}</p>}
+  <div class="card-tags">
+    {tags.map((t) => <TagPill tag={t} />)}
+  </div>
+</a>
+
+<style>
+  .card {
+    display: block;
+    text-decoration: none;
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 1.25rem 1.4rem;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    color: var(--ink);
+  }
+  .card:hover {
+    transform: translateY(-2px) rotate(-0.3deg);
+    box-shadow: 0 6px 20px rgba(42, 38, 34, 0.06);
+  }
+  .card-meta {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.66rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .card-title {
+    font-family: var(--serif);
+    font-variation-settings: 'opsz' 36, 'SOFT' 80, 'wght' 450;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    margin: 0.6rem 0 0.5rem;
+    font-weight: 450;
+  }
+  .card-summary {
+    margin: 0 0 0.9rem;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+</style>

@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TagPill from '../../components/TagPill.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  return notes.map((note) => ({
+    params: { slug: note.id },
+    props: { note },
+  }));
+}
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+const dateStr = note.data.date.toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+---
+<BaseLayout title={`${note.data.title} · Gabrielle Uy`} description={note.data.summary}>
+  <article class="note">
+    <header>
+      <div class="meta">
+        <span>{dateStr}</span>
+        {note.data.location && <span> · {note.data.location}</span>}
+      </div>
+      <h1>{note.data.title}</h1>
+      <div class="tags">
+        {note.data.tags.map((t) => <TagPill tag={t} />)}
+      </div>
+    </header>
+
+    <div class="body">
+      <Content />
+    </div>
+
+    <footer class="back">
+      <a href="/notebook/">← back to the notebook</a>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .note { max-width: 38rem; margin: 0 auto; padding: 1rem 0; }
+  .note header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .meta {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .note h1 {
+    font-family: var(--serif);
+    font-variation-settings: 'opsz' 144, 'SOFT' 100, 'wght' 500;
+    font-size: 2.1rem;
+    line-height: 1.15;
+    margin: 0.8rem 0 1rem;
+    font-weight: 500;
+  }
+  .tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+  .body { font-size: 1.05rem; }
+  .body :global(p) { margin: 1rem 0; }
+  .body :global(h2) {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    margin: 2rem 0 0.6rem;
+    font-weight: 500;
+  }
+  .body :global(blockquote) {
+    border-left: 2px solid var(--accent);
+    padding-left: 1rem;
+    margin: 1.2rem 0;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .body :global(code) {
+    font-family: var(--mono);
+    font-size: 0.92em;
+    background: rgba(91, 125, 122, 0.08);
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+  }
+  .body :global(pre) {
+    background: #1f1d1a;
+    color: #f0ebe0;
+    padding: 1rem 1.2rem;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    border-radius: 4px;
+  }
+  .body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    font-size: 0.95rem;
+  }
+  .body :global(th), .body :global(td) {
+    padding: 0.5rem 0.7rem;
+    border-bottom: 1px solid var(--rule);
+    text-align: left;
+  }
+  .body :global(th) {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+
+  .back {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+  }
+  .back a { text-decoration: none; color: var(--ink-soft); }
+  .back a:hover { color: var(--warm); }
+</style>

@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects, ALL_REPOS, repoLabel } from '../../data/projects';
+---
+<BaseLayout
+  title="Repository · Gabrielle Uy"
+  description="Thirty-three projects on GitHub — cybersecurity work first, then other technical work."
+>
+  <header class="page-head">
+    <h1>repository</h1>
+    <p>
+      Thirty-three projects on GitHub — cybersecurity work first (penetration
+      testing, intrusion detection, incident response &amp; risk management),
+      followed by other technical work. Click a category to filter.
+    </p>
+  </header>
+
+  <div class="filter-bar">
+    <span class="filter-label">filter:</span>
+    {ALL_REPOS.map((r) => (
+      <button type="button" class="filter-pill" data-repo={r}>{repoLabel(r)}</button>
+    ))}
+    <button type="button" class="filter-clear" data-clear hidden>clear</button>
+  </div>
+
+  <div class="cards">
+    {projects.map((p) => (
+      <ProjectCard
+        number={p.number}
+        title={p.title}
+        description={p.description}
+        url={p.url}
+        repo={p.repo}
+      />
+    ))}
+  </div>
+
+  <p class="empty-filter" hidden>No projects in that category.</p>
+
+  <script is:inline>
+    (function () {
+      const pills = document.querySelectorAll('.filter-pill[data-repo]');
+      const cards = document.querySelectorAll('.card[data-repo]');
+      const clearBtn = document.querySelector('[data-clear]');
+      const emptyMsg = document.querySelector('.empty-filter');
+      let active = null;
+
+      function applyFilter() {
+        let visible = 0;
+        cards.forEach((card) => {
+          const show = !active || card.dataset.repo === active;
+          card.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        if (clearBtn) clearBtn.hidden = !active;
+        if (emptyMsg) emptyMsg.hidden = visible > 0;
+      }
+
+      pills.forEach((pill) => {
+        pill.addEventListener('click', () => {
+          const repo = pill.dataset.repo;
+          if (active === repo) {
+            active = null;
+            pill.classList.remove('active');
+          } else {
+            pills.forEach((p) => p.classList.remove('active'));
+            pill.classList.add('active');
+            active = repo;
+          }
+          applyFilter();
+        });
+      });
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          active = null;
+          pills.forEach((p) => p.classList.remove('active'));
+          applyFilter();
+        });
+      }
+
+      // Auto-filter from URL hash (e.g. /repository/#Penetration-Testing)
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        const matchPill = document.querySelector('.filter-pill[data-repo="' + hash + '"]');
+        if (matchPill) matchPill.click();
+      }
+    })();
+  </script>
+</BaseLayout>
+
+<style>
+  .page-head {
+    max-width: 42rem;
+    padding: 1rem 0 2rem;
+  }
+  .page-head h1 {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 1.4rem;
+    letter-spacing: 0.02em;
+    margin: 0 0 1rem;
+    color: var(--ink);
+  }
+  .page-head p { color: var(--ink-soft); margin: 0; }
+
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem 0 1.5rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 2rem;
+    align-items: baseline;
+  }
+  .filter-label {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    margin-right: 0.4rem;
+  }
+  .filter-pill {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.62rem;
+    text-transform: lowercase;
+    letter-spacing: 0.04em;
+    padding: 0.3rem 0.6rem 0.22rem;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: white;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.12s ease, border-color 0.12s ease;
+  }
+  .filter-pill:hover {
+    background: var(--accent-deep);
+    border-color: var(--accent-deep);
+  }
+  .filter-pill.active,
+  .filter-pill.active:hover {
+    background: var(--warm);
+    border-color: var(--warm);
+  }
+  .filter-clear {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.6rem;
+    letter-spacing: 0.04em;
+    padding: 0.3rem 0.6rem 0.22rem;
+    background: transparent;
+    border: 1px dashed var(--ink-soft);
+    color: var(--ink-soft);
+    cursor: pointer;
+    line-height: 1;
+    margin-left: 0.3rem;
+  }
+  .filter-clear:hover {
+    color: var(--warm);
+    border-color: var(--warm);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 700px) { .cards { grid-template-columns: 1fr; } }
+
+  .empty-filter {
+    padding: 2rem;
+    text-align: center;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+</style>

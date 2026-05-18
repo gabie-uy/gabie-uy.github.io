@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostcardCard from '../../components/PostcardCard.astro';
+import { getCollection } from 'astro:content';
+
+const notes = (await getCollection('notes')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+const allTags = [...new Set(notes.flatMap((n) => n.data.tags))].sort();
+---
+<BaseLayout title="Notebook · Gabrielle Uy">
+  <header class="page-head">
+    <h1>notebook</h1>
+    <p>
+      Field notes — detections, postmortems, talks, travel, journal pages. One shelf,
+      sorted by date.
+    </p>
+  </header>
+
+  <div class="tag-bar">
+    <span class="filter-label">tags:</span>
+    {allTags.map((tag) => (
+      <span class="tag-link">{tag}</span>
+    ))}
+  </div>
+
+  <div class="cards">
+    {notes.map((n) => (
+      <PostcardCard
+        href={`/notebook/${n.id}/`}
+        title={n.data.title}
+        date={n.data.date}
+        tags={n.data.tags}
+        summary={n.data.summary}
+        location={n.data.location}
+      />
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-head {
+    max-width: 38rem;
+    padding: 1rem 0 2rem;
+  }
+  .page-head h1 {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 1.4rem;
+    letter-spacing: 0.02em;
+    margin: 0 0 1rem;
+    color: var(--ink);
+  }
+  .page-head p {
+    font-family: var(--serif);
+    font-variation-settings: 'opsz' 16, 'SOFT' 60;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .tag-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem 0 1.5rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1.5rem;
+    align-items: baseline;
+  }
+  .filter-label {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    margin-right: 0.4rem;
+  }
+  .tag-link {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.62rem;
+    text-transform: lowercase;
+    letter-spacing: 0.04em;
+    padding: 0.25rem 0.55rem 0.18rem;
+    border: 1px solid var(--rule);
+    background: var(--paper-warm);
+    color: var(--ink-soft);
+    line-height: 1;
+    cursor: pointer;
+  }
+  .tag-link:hover {
+    border-color: var(--warm);
+    color: var(--warm);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 900px) { .cards { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+</style>

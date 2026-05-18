@@ -1,0 +1,22 @@
+{
+  "name": "gabies-personal",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource-variable/fraunces": "^5.2.9",
+    "@fontsource-variable/ibm-plex-sans": "^5.2.8",
+    "@fontsource-variable/newsreader": "^5.2.10",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "@fontsource/poppins": "^5.2.7",
+    "@fontsource/silkscreen": "^5.2.8",
+    "astro": "^5.0.0"
+  }
+}

@@ -1,0 +1,325 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Now from '../components/Now.astro';
+import { projects } from '../data/projects';
+import type { ParentRepo } from '../data/projects';
+
+const topicSlugs: ParentRepo[] = [
+  'Penetration-Testing',
+  'Intrusion-Detection',
+  'Incident-Response-Risk-Management',
+  'Web-Development',
+];
+const topicMeta: Record<ParentRepo, { name: string; blurb: string }> = {
+  'Penetration-Testing': {
+    name: 'penetration testing',
+    blurb: 'Offensive security — exploitation, OSINT, web attacks, payload crafting.',
+  },
+  'Intrusion-Detection': {
+    name: 'intrusion detection',
+    blurb: 'Investigating attacks across web apps, networks, endpoints, and cloud.',
+  },
+  'Incident-Response-Risk-Management': {
+    name: 'incident response',
+    blurb: 'Deconstructing security events, forensics, and risk management practice.',
+  },
+  'Web-Development': {
+    name: 'web development',
+    blurb: 'HTML, CSS, JavaScript, React — frontend learning and small projects.',
+  },
+  'Python': { name: 'python', blurb: 'Python exercises and small projects.' },
+  'Other-Languages': { name: 'other languages', blurb: 'SQL, C++, and other technical bits.' },
+};
+const homepageTopics = topicSlugs.map((slug) => ({
+  slug,
+  count: projects.filter((p) => p.repo === slug).length,
+  ...topicMeta[slug],
+}));
+---
+<BaseLayout>
+  <section class="hero">
+    <div class="hero-text">
+      <h1><span id="hero-typer">hello</span><span class="blink">_</span></h1>
+      <p class="lede">
+        I'm Gabrielle. You'll find bits and pieces of me here — notes from my work in
+        detection &amp; defensive security, postcards and photos from places I've been,
+        journal pages, and the occasional appearance from Bella, my cat.
+      </p>
+      <p class="welcome">Stay as long as you like.</p>
+    </div>
+    <div class="hero-image">
+      <img
+        src="/images/gabie-and-bella.jpg"
+        alt="Polaroid of Gabrielle holding her gray cat Bella, with a New Yorker poster in the background"
+        class="hero-polaroid"
+        width="800"
+        height="610"
+      />
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      const el = document.getElementById('hero-typer');
+      if (!el) return;
+      const phrase = 'hello';
+      const TYPE_MS = 130;
+      const DELETE_MS = 75;
+      const HOLD_FULL_MS = 2200;
+      const HOLD_EMPTY_MS = 600;
+      let charIdx = phrase.length;
+      let deleting = true;
+      function tick() {
+        if (deleting) {
+          charIdx--;
+          el.textContent = phrase.slice(0, charIdx);
+          if (charIdx === 0) {
+            deleting = false;
+            setTimeout(tick, HOLD_EMPTY_MS);
+            return;
+          }
+          setTimeout(tick, DELETE_MS);
+        } else {
+          charIdx++;
+          el.textContent = phrase.slice(0, charIdx);
+          if (charIdx === phrase.length) {
+            deleting = true;
+            setTimeout(tick, HOLD_FULL_MS);
+            return;
+          }
+          setTimeout(tick, TYPE_MS);
+        }
+      }
+      setTimeout(tick, HOLD_FULL_MS);
+    })();
+  </script>
+
+  <section class="grid">
+    <div>
+      <div class="section-head">
+        <h2>my projects</h2>
+        <a href="/repository/">view all →</a>
+      </div>
+      <div class="topics">
+        {homepageTopics.map((t) => (
+          <a class={`topic-card topic-${t.slug}`} href={`/repository/#${t.slug}`}>
+            <div class="topic-meta">
+              <span class="topic-count">{t.count.toString().padStart(2, '0')}</span>
+              <span class="topic-projects">projects</span>
+            </div>
+            <h3 class="topic-name">{t.name}</h3>
+            <p class="topic-blurb">{t.blurb}</p>
+            <span class="topic-cta">explore →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+    <aside>
+      <Now />
+    </aside>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 1.5rem 0 3rem;
+    display: grid;
+    grid-template-columns: minmax(0, 32rem) 22rem;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 800px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+  .hero-text { min-width: 0; }
+  .hero-image {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5rem;
+  }
+  .hero-polaroid {
+    width: 100%;
+    max-width: 22rem;
+    height: auto;
+    display: block;
+    transform: rotate(1.5deg);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow:
+      0 1px 2px rgba(28, 34, 48, 0.08),
+      0 8px 24px rgba(28, 34, 48, 0.12);
+  }
+  @media (max-width: 800px) {
+    .hero-polaroid {
+      /* fluid scale on mobile: min 11rem, fluid 65vw, capped at 18rem */
+      max-width: clamp(11rem, 65vw, 18rem);
+    }
+  }
+  .hero-polaroid:hover {
+    transform: rotate(0deg) translateY(-2px);
+    box-shadow:
+      0 2px 4px rgba(28, 34, 48, 0.1),
+      0 14px 32px rgba(28, 34, 48, 0.16);
+  }
+  .hero h1 {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 2.2rem;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    margin: 0 0 1.6rem;
+    color: var(--ink);
+  }
+  .hero h1 .blink {
+    display: inline-block;
+    color: var(--accent);
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .hero .lede {
+    font-family: var(--serif);
+    font-variation-settings: 'opsz' 20, 'SOFT' 70;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 1rem;
+  }
+  .hero .welcome {
+    font-family: var(--serif);
+    font-variation-settings: 'opsz' 18, 'SOFT' 100, 'wght' 400;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 18rem;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.4rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-head h2 {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .section-head a {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: var(--ink-soft);
+  }
+  .section-head a:hover { color: var(--warm); }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 640px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+
+  .topics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 640px) {
+    .topics { grid-template-columns: 1fr; }
+  }
+
+  .topic-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    background: white;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--ink-soft);
+    padding: 1.2rem 1.4rem 1.1rem;
+    color: var(--ink);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-left-color 0.18s ease;
+    min-height: 11rem;
+  }
+  .topic-Penetration-Testing,
+  .topic-Intrusion-Detection,
+  .topic-Incident-Response-Risk-Management {
+    border-left-color: var(--accent);
+  }
+  .topic-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(28, 34, 48, 0.08);
+  }
+  .topic-card:hover .topic-cta { color: var(--warm); }
+
+  .topic-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+  .topic-count {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 1.4rem;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .topic-Web-Development .topic-count { color: var(--ink-soft); }
+  .topic-projects {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+  }
+  .topic-name {
+    font-size: 1.18rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    text-transform: capitalize;
+  }
+  .topic-blurb {
+    margin: 0 0 0.9rem;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    flex: 1;
+  }
+  .topic-cta {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    align-self: flex-start;
+    transition: color 0.15s ease;
+  }
+</style>

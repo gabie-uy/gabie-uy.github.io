@@ -1,0 +1,31 @@
+---
+interface Props { tag: string; }
+const { tag } = Astro.props;
+
+const techTags = new Set(['detection', 'postmortem', 'talk']);
+const klass = techTags.has(tag) ? 'tag tag-tech' : 'tag';
+---
+<span class={klass}>{tag}</span>
+
+<style>
+  .tag {
+    display: inline-block;
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    text-transform: lowercase;
+    padding: 0.25rem 0.55rem 0.18rem;
+    border: 1px solid var(--rule);
+    border-radius: 0;
+    color: var(--ink-soft);
+    background: var(--paper-warm);
+    line-height: 1;
+  }
+  .tag-tech {
+    color: white;
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+</style>
