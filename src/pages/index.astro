@@ -41,20 +41,24 @@ const homepageTopics = topicSlugs.map((slug) => ({
     <div class="hero-text">
       <h1><span id="hero-typer">hello</span><span class="blink">_</span></h1>
       <p class="lede">
-        I'm Gabrielle. You'll find bits and pieces of me here — notes from my work in
-        detection &amp; defensive security, postcards and photos from places I've been,
-        journal pages, and the occasional appearance from Bella, my cat.
+        I'm Gabrielle. You'll find bits and pieces of me here — technical bits
+        and cybersecurity breaches. Everything I worked on in tech is here
+        (except, of course, anything that has to be hidden).
       </p>
-      <p class="welcome">Stay as long as you like.</p>
+      <p class="welcome">
+        I'm managed by my boss, Bella (the British Shorthair).
+      </p>
     </div>
     <div class="hero-image">
-      <img
-        src="/images/gabie-and-bella.jpg"
-        alt="Polaroid of Gabrielle holding her gray cat Bella, with a New Yorker poster in the background"
-        class="hero-polaroid"
-        width="800"
-        height="610"
-      />
+      <div class="polaroid-wrap">
+        <img
+          src="/images/gabie-and-bella.jpg"
+          alt="Polaroid of Gabrielle holding her gray cat Bella, with a New Yorker poster in the background"
+          class="hero-polaroid"
+          width="800"
+          height="610"
+        />
+      </div>
     </div>
   </section>
 
@@ -93,6 +97,60 @@ const homepageTopics = topicSlugs.map((slug) => ({
       setTimeout(tick, HOLD_FULL_MS);
     })();
   </script>
+
+  <section class="player-card">
+    <div class="pc-bar">
+      <span class="pc-title">player · stats</span>
+      <a href="/about/#resume" class="pc-link">full sheet →</a>
+    </div>
+    <div class="pc-body">
+      <div class="pc-left">
+        <div class="pc-avatar-frame">
+          <img
+            src="/images/player-avatar.png"
+            alt="Pixel-art portrait of Gabrielle"
+            class="pc-avatar"
+            width="256"
+            height="256"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          />
+          <div class="pc-avatar-fallback" aria-hidden="true">
+            <span class="pc-avatar-glyph">?</span>
+            <span class="pc-avatar-hint">avatar</span>
+          </div>
+        </div>
+        <div class="pc-name">Gabrielle Uy</div>
+      </div>
+      <dl class="pc-right">
+        <div class="pc-stat">
+          <dt class="pc-label">class</dt>
+          <dd class="pc-value">Cybersecurity Analyst</dd>
+        </div>
+        <div class="pc-stat">
+          <dt class="pc-label">guild</dt>
+          <dd class="pc-value pc-value-stack">
+            <span>Webserves Inc.</span>
+            <span>Fordham Center for Cybersecurity</span>
+            <span>Fordham GSAS</span>
+            <span>Fiber-Rex Philippines</span>
+          </dd>
+        </div>
+        <div class="pc-stat">
+          <dt class="pc-label">badges</dt>
+          <dd class="pc-value">
+            CompTIA Security+ <span class="pc-sep">·</span> ISC2 CC
+          </dd>
+        </div>
+        <div class="pc-stat">
+          <dt class="pc-label">degree</dt>
+          <dd class="pc-value pc-value-stack">
+            <span>M.Sc. Cybersecurity · Fordham University</span>
+            <span>B.Sc. Information Technology · Mapúa University</span>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
 
   <section class="grid">
     <div>
@@ -140,29 +198,38 @@ const homepageTopics = topicSlugs.map((slug) => ({
     justify-content: center;
     padding-top: 0.5rem;
   }
-  .hero-polaroid {
+  .polaroid-wrap {
+    position: relative;
+    display: inline-block;
     width: 100%;
     max-width: 22rem;
-    height: auto;
-    display: block;
     transform: rotate(1.5deg);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    box-shadow:
-      0 1px 2px rgba(28, 34, 48, 0.08),
-      0 8px 24px rgba(28, 34, 48, 0.12);
+    transition: transform 0.3s ease;
   }
   @media (max-width: 800px) {
-    .hero-polaroid {
-      /* fluid scale on mobile: min 11rem, fluid 65vw, capped at 18rem */
+    .polaroid-wrap {
       max-width: clamp(11rem, 65vw, 18rem);
     }
   }
-  .hero-polaroid:hover {
-    transform: rotate(0deg) translateY(-2px);
+  .polaroid-wrap:hover {
+    transform: rotate(-0.5deg) translateY(-3px);
+  }
+  .hero-polaroid {
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow:
+      0 1px 2px rgba(28, 34, 48, 0.08),
+      0 8px 24px rgba(28, 34, 48, 0.12);
+    transition: box-shadow 0.3s ease;
+  }
+  .polaroid-wrap:hover .hero-polaroid {
     box-shadow:
       0 2px 4px rgba(28, 34, 48, 0.1),
-      0 14px 32px rgba(28, 34, 48, 0.16);
+      0 16px 40px rgba(28, 34, 48, 0.18),
+      0 0 0 1px rgba(0, 107, 182, 0.15);
   }
+
   .hero h1 {
     font-family: var(--pixel);
     -webkit-font-smoothing: none;
@@ -233,6 +300,176 @@ const homepageTopics = topicSlugs.map((slug) => ({
     color: var(--ink-soft);
   }
   .section-head a:hover { color: var(--warm); }
+
+  /* Player card — pixel game stat sheet */
+  .player-card {
+    margin: 1rem 0 2.8rem;
+    background: white;
+    position: relative;
+    /* Stepped pixel border + hard offset shadow */
+    box-shadow:
+      0 0 0 2px var(--ink),
+      6px 6px 0 var(--accent),
+      6px 6px 0 2px var(--ink);
+  }
+  .pc-bar {
+    background: var(--ink);
+    color: white;
+    padding: 0.45rem 0.9rem 0.38rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 2px solid var(--accent);
+  }
+  .pc-title {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: white;
+  }
+  .pc-link {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .pc-link:hover { color: #ffbd2e; }
+
+  .pc-body {
+    padding: 1.4rem 1.4rem 1.3rem;
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1.6rem;
+    align-items: start;
+  }
+  @media (max-width: 540px) {
+    .pc-body { grid-template-columns: 6.5rem 1fr; gap: 1rem; }
+  }
+
+  /* Left column: pixel avatar + name */
+  .pc-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .pc-avatar-frame {
+    width: 100%;
+    max-width: 9rem;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    border: 2px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--accent);
+    background: var(--paper-warm);
+    overflow: hidden;
+  }
+  .pc-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    display: block;
+  }
+  /* Hidden by default; shown via JS onerror when avatar fails to load */
+  .pc-avatar-fallback {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    background: var(--paper-warm);
+    color: var(--ink-soft);
+  }
+  .pc-avatar-glyph {
+    font-family: var(--pixel);
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .pc-avatar-hint {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.6rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .pc-name {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-align: center;
+    line-height: 1.3;
+    margin-top: 0.2rem;
+    word-break: break-word;
+  }
+
+  /* Right column: stats list */
+  .pc-right {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .pc-stat {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    padding: 0.3rem 0;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .pc-value-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .pc-stat:last-child { border-bottom: none; }
+  .pc-stat dt, .pc-stat dd { margin: 0; }
+  .pc-label {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    text-transform: uppercase;
+    min-width: 4.5rem;
+    padding-top: 0.25rem;
+  }
+  .pc-value {
+    font-size: 0.95rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .pc-value a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--rule);
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .pc-value a:hover {
+    color: var(--warm);
+    border-bottom-color: var(--warm);
+  }
+  .pc-sep { color: var(--ink-soft); margin: 0 0.2rem; }
 
   .cards {
     display: grid;

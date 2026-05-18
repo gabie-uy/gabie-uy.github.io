@@ -31,12 +31,15 @@ const numberStr = number.toString().padStart(2, '0');
     border: 1px solid var(--rule);
     padding: 1.3rem 1.4rem 1.2rem;
     color: var(--ink);
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
     height: 100%;
   }
   .card:hover {
-    transform: translateY(-2px) rotate(-0.2deg);
-    box-shadow: 0 6px 20px rgba(28, 34, 48, 0.08);
+    transform: translateY(-4px) rotate(-0.4deg);
+    box-shadow:
+      0 10px 28px rgba(28, 34, 48, 0.1),
+      4px 4px 0 rgba(0, 107, 182, 0.1);
+    border-color: rgba(0, 107, 182, 0.35);
   }
 
   .card-head {

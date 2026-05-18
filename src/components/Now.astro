@@ -1,54 +1,260 @@
 ---
-const currently = [
-  { label: 'writing', value: 'detections for cloud lateral movement' },
-  { label: 'reading', value: "The Cuckoo's Egg (again)" },
-  { label: 'watching', value: 'twitch.tv/gabieuy on Thursdays' },
-  { label: 'missing', value: 'Kyoto in spring' },
+type Stat = {
+  label: string;
+  value: number;
+  max: number;
+  type?: 'hearts' | 'beans' | 'zzz';
+};
+const stats: Stat[] = [
+  { label: 'caffeine', value: 10, max: 10, type: 'beans'  },
+  { label: 'sleep',    value: 4,  max: 10, type: 'zzz'    },
+  { label: 'bella',    value: 10, max: 10, type: 'hearts' },
 ];
 ---
 <aside class="now">
   <h4>currently</h4>
-  <ul>
-    {currently.map((item) => (
-      <li><span class="label">{item.label}</span> {item.value}</li>
+  <div class="stats">
+    {stats.map((s) => (
+      <div class="stat">
+        <div class="stat-row">
+          <span class="stat-label">{s.label}</span>
+          <span class="stat-value" data-value-for={s.label}>{s.value}/{s.max}</span>
+        </div>
+        {s.type === 'hearts' ? (
+          <div
+            class="hearts"
+            role="meter"
+            aria-label={s.label}
+            aria-valuenow={s.value}
+            aria-valuemin={0}
+            aria-valuemax={s.max}
+          >
+            {Array.from({ length: s.max }, (_, i) => (
+              <img
+                src="/images/heart.png"
+                alt=""
+                aria-hidden="true"
+                class={`heart-img ${i < s.value ? 'filled' : 'empty'}`}
+                width="32"
+                height="32"
+              />
+            ))}
+          </div>
+        ) : s.type === 'beans' ? (
+          <div
+            class="beans"
+            role="meter"
+            data-meter-for={s.label}
+            aria-label={s.label}
+            aria-valuenow={s.value}
+            aria-valuemin={0}
+            aria-valuemax={s.max}
+          >
+            {Array.from({ length: s.max }, (_, i) => (
+              <img
+                src="/images/coffee-bean.png"
+                alt=""
+                aria-hidden="true"
+                class={`bean-img ${i < s.value ? 'filled' : 'empty'}`}
+                data-bean-index={i}
+                width="32"
+                height="32"
+              />
+            ))}
+          </div>
+        ) : s.type === 'zzz' ? (
+          <div
+            class="zzzs"
+            role="meter"
+            aria-label={s.label}
+            aria-valuenow={s.value}
+            aria-valuemin={0}
+            aria-valuemax={s.max}
+          >
+            {Array.from({ length: s.max }, (_, i) => (
+              <img
+                src="/images/zzz.png"
+                alt=""
+                aria-hidden="true"
+                class={`zzz-img ${i < s.value ? 'filled' : 'empty'}`}
+                width="32"
+                height="32"
+              />
+            ))}
+          </div>
+        ) : (
+          <div
+            class="stat-bar"
+            role="meter"
+            aria-label={s.label}
+            aria-valuenow={s.value}
+            aria-valuemin={0}
+            aria-valuemax={s.max}
+          >
+            {Array.from({ length: s.max }, (_, i) => (
+              <span class={`seg ${i < s.value ? 'filled' : 'empty'}`}></span>
+            ))}
+          </div>
+        )}
+      </div>
     ))}
-  </ul>
+  </div>
 </aside>
+
+<script is:inline>
+  // Caffeine level by local time of day:
+  // 7am-10am: 10/10 (peak)
+  // 10am-6pm: linear decline from 10 to 0
+  // before 7am or after 6pm: 0
+  (function () {
+    function caffeineByTime() {
+      const now = new Date();
+      const m = now.getHours() * 60 + now.getMinutes();
+      const PEAK_START = 7 * 60;     // 7:00
+      const PEAK_END   = 10 * 60;    // 10:00
+      const ZERO_TIME  = 18 * 60;    // 18:00
+      const SPAN = ZERO_TIME - PEAK_END; // 480 minutes
+      if (m < PEAK_START) return 0;
+      if (m < PEAK_END)   return 10;
+      if (m >= ZERO_TIME) return 0;
+      return Math.max(0, Math.ceil(10 - ((m - PEAK_END) / SPAN) * 10));
+    }
+    function applyCaffeine() {
+      const value = caffeineByTime();
+      const meter = document.querySelector('[data-meter-for="caffeine"]');
+      if (!meter) return;
+      meter.setAttribute('aria-valuenow', String(value));
+      meter.querySelectorAll('.bean-img').forEach((el) => {
+        const idx = parseInt(el.getAttribute('data-bean-index') || '0', 10);
+        if (idx < value) {
+          el.classList.add('filled');
+          el.classList.remove('empty');
+        } else {
+          el.classList.remove('filled');
+          el.classList.add('empty');
+        }
+      });
+      const valLabel = document.querySelector('[data-value-for="caffeine"]');
+      if (valLabel) valLabel.textContent = value + '/10';
+    }
+    applyCaffeine();
+    // Re-check every minute so the bean count drifts if user keeps the page open
+    setInterval(applyCaffeine, 60000);
+  })();
+</script>
 
 <style>
   .now {
     border: 1px dashed var(--rule);
-    padding: 1.1rem 1.3rem;
-    background: rgba(91, 125, 122, 0.04);
+    padding: 1.3rem 1.4rem;
+    background: rgba(0, 107, 182, 0.04);
   }
   .now h4 {
-    margin: 0 0 0.8rem;
+    margin: 0 0 1.1rem;
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .stat-label {
+    font-family: var(--pixel);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+  .stat-value {
     font-family: var(--pixel);
     -webkit-font-smoothing: none;
     font-smooth: never;
     font-size: 0.72rem;
-    letter-spacing: 0.06em;
-    color: var(--accent);
-  }
-  .now ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    font-size: 0.95rem;
-  }
-  .now li {
-    margin: 0.5rem 0;
+    letter-spacing: 0.02em;
     color: var(--ink-soft);
-    line-height: 1.5;
   }
-  .label {
-    display: inline-block;
-    min-width: 5.5rem;
-    font-family: var(--pixel);
-    -webkit-font-smoothing: none;
-    font-smooth: never;
-    font-size: 0.66rem;
-    letter-spacing: 0.04em;
-    color: var(--ink);
+
+  .stat-bar {
+    display: flex;
+    gap: 2px;
+    height: 0.7rem;
+  }
+  .seg { flex: 1; image-rendering: pixelated; }
+  .seg.filled {
+    background: var(--accent);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  }
+  .seg.empty { background: var(--rule); }
+
+  /* Pixel image trackers — hearts + coffee beans + zzz */
+  .hearts, .beans, .zzzs {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 0.2rem 0;
+  }
+  .heart-img, .bean-img, .zzz-img {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    height: 1.9rem;
+    object-fit: contain;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    transition: transform 0.18s ease, filter 0.25s ease;
+  }
+  .heart-img.empty,
+  .bean-img.empty,
+  .zzz-img.empty {
+    filter: grayscale(1) brightness(1.25) opacity(0.3);
+  }
+  .hearts:hover .heart-img.filled {
+    animation: heartBeat 0.6s ease-in-out;
+  }
+  .beans:hover .bean-img.filled {
+    animation: jitter 0.5s ease-in-out;
+  }
+  .zzzs:hover .zzz-img.filled {
+    animation: float 0.9s ease-in-out;
+  }
+  @keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    25%      { transform: scale(1.2); }
+    50%      { transform: scale(0.95); }
+    75%      { transform: scale(1.12); }
+  }
+  @keyframes jitter {
+    0%, 100% { transform: rotate(0); }
+    25%      { transform: rotate(-8deg); }
+    75%      { transform: rotate(8deg); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
   }
 </style>

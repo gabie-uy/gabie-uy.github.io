@@ -31,7 +31,7 @@ const {
       <a href="/" class="brand">Gabrielle</a>
       <nav>
         <a href="/about/">about</a>
-        <a href="/about/#work">work</a>
+        <a href="/about/#resume">resume</a>
         <a href="/repository/">repository</a>
       </nav>
     </header>
@@ -71,7 +71,7 @@ const {
       })();
     </script>
     <footer class="site-footer">
-      <p>© {new Date().getFullYear()} gabrielle uy · made by hand</p>
+      <p>© {new Date().getFullYear()} gabrielle uy</p>
     </footer>
 
     <style is:global>
@@ -188,10 +188,51 @@ const {
         font-size: 0.72rem;
         color: var(--ink-soft);
         letter-spacing: 0.02em;
+        text-align: center;
       }
       .site-footer p { margin: 0.4rem 0; }
-      .site-footer a { color: var(--ink-soft); }
-      .site-footer a:hover { color: var(--warm); }
+      .site-footer-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 0.8rem;
+      }
+      .site-footer-icons a {
+        display: inline-block;
+        line-height: 0;
+        transition: transform 0.18s ease;
+      }
+      .site-footer-icons a:hover { transform: translateY(-2px); }
+      .site-footer-icons img {
+        width: 2.4rem;
+        height: 2.4rem;
+        object-fit: contain;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        display: block;
+      }
+      .site-footer-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 0.9rem;
+      }
+      .site-footer-icons a {
+        display: inline-block;
+        line-height: 0;
+        transition: transform 0.18s ease;
+      }
+      .site-footer-icons a:hover { transform: translateY(-2px); }
+      .site-footer-icons img {
+        width: 2.2rem;
+        height: 2.2rem;
+        object-fit: contain;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        display: block;
+      }
 
       /* Sitewide scroll-reveal — smooth ease-out, sections + cards.
          Double-class selector boosts specificity above scoped .card rules. */
