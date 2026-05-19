@@ -48,6 +48,14 @@ const homepageTopics = topicSlugs.map((slug) => ({
       <p class="welcome">
         I'm managed by my boss, Bella (the British Shorthair).
       </p>
+      <div class="hero-socials">
+        <a href="https://linkedin.com/gabrielleaguy" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img src="/images/linkedin.png" alt="LinkedIn" width="80" height="80" />
+        </a>
+        <a href="https://github.com/gabie-uy" target="_blank" rel="noopener" aria-label="GitHub">
+          <img src="/images/github.png" alt="GitHub" width="80" height="80" />
+        </a>
+      </div>
     </div>
     <div class="hero-image">
       <div class="polaroid-wrap">
@@ -261,6 +269,26 @@ const homepageTopics = topicSlugs.map((slug) => ({
     font-size: 1.05rem;
     color: var(--ink-soft);
     margin: 0;
+  }
+  .hero-socials {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.1rem;
+  }
+  .hero-socials a {
+    display: inline-block;
+    line-height: 0;
+    transition: transform 0.18s ease;
+  }
+  .hero-socials a:hover { transform: translateY(-3px); }
+  .hero-socials img {
+    width: 2.6rem;
+    height: 2.6rem;
+    object-fit: contain;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    display: block;
   }
 
   .grid {
