@@ -190,11 +190,11 @@ const homepageTopics = topicSlugs.map((slug) => ({
   .hero {
     padding: 1.5rem 0 3rem;
     display: grid;
-    grid-template-columns: minmax(0, 32rem) 22rem;
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
+    gap: clamp(1.5rem, 4vw, 3rem);
     align-items: start;
   }
-  @media (max-width: 800px) {
+  @media (max-width: 720px) {
     .hero {
       grid-template-columns: 1fr;
       gap: 2rem;
@@ -293,11 +293,11 @@ const homepageTopics = topicSlugs.map((slug) => ({
 
   .grid {
     display: grid;
-    grid-template-columns: 1fr 18rem;
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 18rem);
+    gap: clamp(1.5rem, 4vw, 3rem);
     margin-top: 2rem;
   }
-  @media (max-width: 860px) {
+  @media (max-width: 760px) {
     .grid { grid-template-columns: 1fr; }
   }
 
@@ -510,11 +510,8 @@ const homepageTopics = topicSlugs.map((slug) => ({
 
   .topics {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  @media (max-width: 640px) {
-    .topics { grid-template-columns: 1fr; }
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: clamp(0.5rem, 2vw, 1rem);
   }
 
   .topic-card {
@@ -528,6 +525,19 @@ const homepageTopics = topicSlugs.map((slug) => ({
     color: var(--ink);
     transition: transform 0.18s ease, box-shadow 0.18s ease, border-left-color 0.18s ease;
     min-height: 11rem;
+  }
+  @media (max-width: 640px) {
+    .topic-card {
+      padding: 0.85rem 0.95rem 0.8rem;
+      min-height: 7.5rem;
+    }
+    .topic-name { font-size: 1rem; margin-bottom: 0.35rem; }
+    .topic-blurb { font-size: 0.82rem; line-height: 1.4; }
+    .topic-meta { margin-bottom: 0.3rem; }
+    .topic-count { font-size: 1.1rem; }
+    .topic-projects { font-size: 0.56rem; }
+    .topic-cta { font-size: 0.58rem; }
+    .section-head h2 { font-size: 1.05rem; }
   }
   .topic-Penetration-Testing,
   .topic-Intrusion-Detection,

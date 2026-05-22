@@ -169,10 +169,9 @@ import { projects, ALL_REPOS, repoLabel } from '../../data/projects';
 
   .cards {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: clamp(0.6rem, 2vw, 1rem);
   }
-  @media (max-width: 700px) { .cards { grid-template-columns: 1fr; } }
 
   .empty-filter {
     padding: 2rem;

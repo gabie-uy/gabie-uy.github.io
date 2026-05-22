@@ -257,4 +257,20 @@ const stats: Stat[] = [
     0%, 100% { transform: translateY(0); }
     50%      { transform: translateY(-3px); }
   }
+
+  /* Mobile-friendly compactness */
+  @media (max-width: 640px) {
+    .now { padding: 1rem 1.1rem; }
+    .now h4 {
+      font-size: 0.88rem;
+      margin: 0 0 0.8rem;
+      padding-bottom: 0.4rem;
+    }
+    .stats { gap: 0.7rem; }
+    .stat { gap: 0.2rem; }
+    .stat-label { font-size: 0.78rem; }
+    .stat-value { font-size: 0.66rem; }
+    .heart-img, .bean-img, .zzz-img { height: 1.45rem; }
+    .stat-bar { height: 0.55rem; }
+  }
 </style>
